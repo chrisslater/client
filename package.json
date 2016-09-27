@@ -1,0 +1,37 @@
+{
+  "name": "ts-react",
+  "version": "1.0.0",
+  "description": "React project with Typescript",
+  "main": "dist/server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/server/index.js",
+    "dev": "concurrently \"npm run tsc:watch\" \"npm run dev:server\" \"npm run build:client\"",
+    "dev:server": "npm run dev:server:start",
+    "dev:server:start": "nodemon --debug --watch dist",
+    "tsc": "tsc",
+    "tsc:watch": "tsc -w",
+    "build:client": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.0.0",
+    "koa-bodyparser": "^3.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-router": "^7.0.1",
+    "koa-static": "^3.0.0",
+    "path": "^0.12.7",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "typescript": "^2.0.2",
+    "webpack": "^1.13.2"
+  },
+  "devDependencies": {
+    "concurrently": "^2.2.0",
+    "nodemon": "^1.10.2",
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^0.8.2",
+    "tslint": "^3.15.1"
+  }
+}

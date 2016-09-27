@@ -1,0 +1,11 @@
+.DS_Store
+.vscode
+dist
+node_modules
+npm-debug.log
+
+# logging
+err.log
+out.log
+
+typings
