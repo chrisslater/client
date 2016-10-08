@@ -8,4 +8,4 @@ app.use(parser());
 
 app.use(serve("static"));
 app.use(serve("dist/app"));
-app.listen(process.env.PORT || 8880);
+app.listen(80);
