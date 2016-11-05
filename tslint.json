@@ -7,6 +7,7 @@
    */
   "extends": "tslint:recommended",
   "rules": {
-    "interface-name": [false, "always-prefix"]
+    "interface-name": [false, "always-prefix"],
+    "quotemark": [true, "single"]
   }
 }

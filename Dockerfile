@@ -2,12 +2,11 @@ FROM node:latest
 
 ADD . /code
 WORKDIR /code
-VOLUME /code
 
-RUN npm install -g typescript
-RUN npm run tsc
-RUN npm install
-RUN npm run build:client
+# RUN npm install -g typescript
+# RUN npm install
+# RUN tsc; exit 0
 
+VOLUME /code/src
 EXPOSE 80
-CMD npm start
+CMD ["./startup.sh"]
