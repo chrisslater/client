@@ -1,22 +1,20 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import * as Relay from "react-relay";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import ApolloClient, { createNetworkInterface } from 'apollo-client';
+import { ApolloProvider } from 'react-apollo';
 
 // import { Hello } from "./modules/welcome/components/Hello";
-import { UserContainer } from "./modules/welcome/components/User";
-import { UserRoute } from "./modules/welcome/routes/UserRoute";
+import { UserContainer } from './modules/welcome/components/User';
 
-Relay.injectNetworkLayer(
-  new Relay.DefaultNetworkLayer("/graphql/", {
-    credentials: "same-origin",
+const client = new ApolloClient({
+  networkInterface: createNetworkInterface({
+    uri: '/graphql/',
   }),
-);
+});
 
 ReactDOM.render(
-  <Relay.Renderer
-    environment={Relay.Store}
-    Container={UserContainer}
-    queryConfig={new UserRoute()}
-  />,
-  document.getElementById("example")
+  <ApolloProvider client={client}>
+    <UserContainer />
+  </ApolloProvider>,
+  document.getElementById('example')
 );

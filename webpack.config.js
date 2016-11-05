@@ -23,21 +23,7 @@ module.exports = {
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
             {
                 test: /\.tsx?$/,
-                loader: [
-                    {
-                        loader: "babel-loader",
-                        options: {
-                            "passPerPreset": true,
-                            "presets": [ "react", "es2015", "stage-0" ],
-                            "plugins": [
-                                "babel-relay-plugin-loader",
-                                "babel-plugin-transform-runtime"
-                            ].map(require.resolve),
-                        }
-                    }, {
-                        loader: "awesome-typescript-loader",
-                    },
-                ]
+                loader: "awesome-typescript-loader",
             }
         ],
         // preLoaders: [

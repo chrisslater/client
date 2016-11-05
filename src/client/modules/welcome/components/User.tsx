@@ -1,26 +1,35 @@
-import * as React from "react";
-import * as Relay from "react-relay";
+import * as React from 'react';
+import { graphql } from 'react-apollo';
+import * as gql from 'graphql-tag';
 
-export interface IUser {
+export interface User {
   name: string;
 }
 
-export interface UserProps {
-  user: IUser;
+export interface Props {
+  data: {
+    user: User;
+  };
 }
 
-export class User extends React.Component<UserProps, void> {
+const UserSchema = gql`
+  query User {
+    user {
+      name
+    }
+  }
+`;
+
+export class User extends React.Component<Props, void> {
   public render() {
-    return (<h1>Hello from {this.props.user.name}!</h1>);
+    const { data } = this.props;
+
+    if (!data.user) {
+      return null;
+    }
+
+    return (<h1>Hello from {data.user.name}!</h1>);
   }
 }
 
-export const UserContainer = Relay.createContainer(User, {
-  fragments: {
-    user: () => Relay.QL`
-      fragment on User {
-        name,
-      }
-    `,
-  },
-});
+export const UserContainer = graphql(UserSchema)(User);
