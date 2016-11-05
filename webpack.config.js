@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require("path");
 
 module.exports = {
     entry: {
@@ -14,23 +15,39 @@ module.exports = {
 
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+        extensions: ["*", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
     },
 
     module: {
-        loaders: [
+        rules: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-            { test: /\.tsx?$/, loader: "ts-loader" }
+            {
+                test: /\.tsx?$/,
+                loader: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            "passPerPreset": true,
+                            "presets": [ "react", "es2015", "stage-0" ],
+                            "plugins": [
+                                "babel-relay-plugin-loader",
+                                "babel-plugin-transform-runtime"
+                            ].map(require.resolve),
+                        }
+                    }, {
+                        loader: "awesome-typescript-loader",
+                    },
+                ]
+            }
         ],
-
-        preLoaders: [
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { test: /\.js$/, loader: "source-map-loader" }
-        ]
+        // preLoaders: [
+        //     // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+        //     { test: /\.js$/, loader: "source-map-loader" }
+        // ]
     },
 
     plugins: [
-      new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"./dist/app/vendor.bundle.js")
+      new webpack.optimize.CommonsChunkPlugin({ name: "vendor", filename: "./dist/app/vendor.bundle.js" }),
     ]
 
     // When importing a module whose path matches one of the following, just
