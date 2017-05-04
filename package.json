@@ -36,7 +36,7 @@
     "koa-router": "^7.0.1",
     "koa-static": "^3.0.0",
     "react": "^15.3.1",
-    "react-apollo": "^0.5.16",
+    "react-apollo": "^1.2.0",
     "react-dom": "^15.3.1",
     "react-relay": "^0.9.3",
     "source-map-loader": "^0.1.5",
